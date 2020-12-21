@@ -1,0 +1,60 @@
+.header {
+  background-color: #fff;
+  border: 3px solid gray;
+  position: fixed;
+  width: 100%;
+  height: 30px;
+  top: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+}
+
+.menu-container {
+  display: inline-block;
+  margin: 0;
+  padding-right: 60px;
+  float: right;
+}
+
+.menu-container li {
+  display: inline-block;
+  list-style: none;
+}
+
+.goods-list {
+    padding-top: 30px;
+}
+
+.goods-list div {
+  display: inline-block;
+}
+
+.basket-window {
+    width: 100px;
+    border: 1px;
+    padding: 10px;
+    background: #ccccc;
+    position: fixed;
+    top: 50px;
+    right: 10px;
+    box-shadow: 0 0 10px gray;
+}
+
+.hidden {
+    display: none;
+}
+
+#cls {
+    border-radius: 50%;
+    background-color: gray;
+    font-size: 34px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: -15px;
+    top: -15px;
+    position: absolute;
+}
