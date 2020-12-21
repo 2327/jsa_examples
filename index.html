@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js</title>
+  <script src="https://kit.fontawesome.com/bbb209f892.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+<body>
+<div id="app">
+    <div  class="col-4">
+      <ul class="list-group list-group-horizontal-sm">
+        <li class="list-group-item"><a href="#">главная</a></li>
+        <li class="list-group-item"><a href="#">ещё одна</a></li>
+        <li class="list-group-item">корзина <i class="fa fa-shopping-cart fa-lg" @click="VisibleCart_trigger"></i></li>
+      </ul>
+
+      <div id="list-cart">
+        <div class="border border-primary animate__animated animate__backInDown" v-if="isVisibleCart">
+          <div v-if="goods_empty.length">
+            <div class="goods-list">
+                <div v-for="good in goods">
+                  <h3>{{ good.product_name }}</h3>
+                  <p>{{ good.price }}</p>
+                </div>
+            </div>
+          </div>
+
+
+          <div v-if="!goods_empty.length">
+            <div class="goods-list">в корзине пусто</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <p>
+    <input type="text" v-model="searchLine" />
+    <button type="button" @click="FilterGoods">search</button>
+  </p>
+  <input type="text" v-model="name" />
+  <p>Hi, my name is {{ name.toUpperCase() }}</p>
+
+  <ul>
+    <li v-for="name in names" @click="clickHandler">{{ name }}</li>
+  </ul>
+
+</div>
+
+<script src="vue.js"></script>
+<script src="scripts.js"></script>
+</body>
+</html>
