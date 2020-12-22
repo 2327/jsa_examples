@@ -28,6 +28,7 @@
 
 .goods-list div {
   display: inline-block;
+  padding-right: 15px;
 }
 
 .basket-window {

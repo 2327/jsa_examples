@@ -9,15 +9,17 @@ const goods = [
     {title: 'Shirt_7', price: 8900, quantity: 7}
 ];
 
-function renderGoodsItem({title, price}){
-    return `
-    <div class="item">
-        <h3>${title}</h3>
-        <p>${price}</p>
-    </div>
-    `;
+function renderGoodsItem(title, price){
+    console.log(title, price);
+    document.getElementById('goods-list').innerHTML += `<div class="item"><h3>` + title + `</h3><p>` + price + `</p></div>`;
 }
 
-const renderItems = items => items.map(renderGoodsItem);
+// const renderItems = items => items.map(renderGoodsItem);
 
-document.getElementById('goods-list').innerHTML = renderItems(goods);
+function renderItems(goods) {
+    for (let [key, value] of goods.entries()) {
+      renderGoodsItem(value.title, value.price);
+    }
+}
+
+ renderItems(goods);
