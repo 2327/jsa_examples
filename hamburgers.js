@@ -1,8 +1,8 @@
 'use strict';
 
 const size = [
-  {size: 'small', price: 20, cal: 20},
-  {size: 'big', price: 100, cal: 40}
+  {title: 'small', price: 20, cal: 20},
+  {title: 'big', price: 100, cal: 40}
 ];
 
 const topping = [
@@ -33,6 +33,12 @@ class Hamburger {
       return total;
     };
   }
+  getSize() {
+    console.log(this.size.title);
+  }
+  getStuffing() {
+    console.log(this.stuffing.title);
+  }
 /*  removeTopping(topping) { // Убрать добавку }
   getToppings(topping) {   // Получить список добавок }
   getSize() {              // Узнать размер гамбургера }
@@ -43,4 +49,4 @@ class Hamburger {
 
 
 const hamburger = new Hamburger(size[0], stuffing[0]);
-console.log(hamburger.calculatePrice());
+console.log(hamburger.getSize());
