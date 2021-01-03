@@ -1,74 +1,104 @@
-const goods = [
-    {title: 'Shirt',   price: 100, quantity: 10},
-    {title: 'Shirt_1', price: 1000, quantity: 1},
-    {title: 'Shirt_2', price: 10000, quantity: 0},
-    {title: 'Shirt_3', price: 10, quantity: 100},
-    {title: 'Shirt_4', price: 500, quantity: 15},
-    {title: 'Shirt_5', price: 800, quantity: 0},
-    {title: 'Shirt_6', price: 9000, quantity: 2},
-    {title: 'Shirt_7', price: 8900, quantity: 7}
-];
+const xhr = new XMLHttpRequest();
 
-class GoodsItem {
-  constructor(title, price) {
-    this.title = title;
-    this.price = price;
-  }
-  render() {
-    return `<div class="goods-item"><h3>${this.title}</h3><p>${this.price}</p></div>`;
-  }
+xhr.onreadystatechange = function () {
+    if(this.readyState === 4){
+        console.log(this.responseText);
+        console.log(this.responseXML);
+        const res = JSON.parse(this.responseText);
+        console.log(res);
+        console.log(JSON.stringify(res));
+    }
+};
+
+xhr.open(
+    'GET',
+    'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json',
+    true
+);
+// xhr.setRequestHeader('Content-Type', 'application/xml');
+
+xhr.send();
+
+
+
+const str = '';
+console.log(1235);
+
+// setTimeout(
+//     () => {console.log(1)},
+//     0
+// );
+
+// setTimeout(
+//     () => {console.log(2)},
+//     1000
+// );
+
+const func = (p1, p2, p3, cb) => {
+    setTimeout(
+        () => {
+            console.log(1);
+            // ...
+            const pr = p1 + p2 + p3; 
+            cb(pr);
+        },
+        1000
+    );
+};
+
+func(1, 2, 3, console.log);
+
+// const promise = new Promise((resolve, reject) => {
+//     setTimeout(
+//         () => Math.round(Math.random() * 100) % 2 ? resolve('Success') : reject('Error'),       
+//         1000
+//     );
+// });
+
+// promise.then((res) => {
+//     console.log(res);
+//     //return new Promise(/* ... */);
+// }).catch(console.error);//.then(/* ... */)
+
+
+const fetchPromise = fetch(
+    'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json',
+    {
+        method: 'GET'
+    }
+);
+console.log('fetchPromise', fetchPromise);
+
+const getRawDataPromise = fetchPromise.then(res => res.json());
+console.log('getRawDataPromise', getRawDataPromise);
+
+const dataPromise = getRawDataPromise.then(res => console.log('res', res));
+console.log('dataPromise', dataPromise);
+
+class CatalogItem {
+
 }
 
-class GoodsList {
-  constructor() {
-    this.goods = [];
-  }
-  fetchGoods() {
-    this.goods = goods;
-  }
-  render() {
-    let listHtml = '';
-    this.goods.forEach(good => {
-      const goodItem = new GoodsItem(good.title, good.price);
-      listHtml += goodItem.render();
-    });
-    document.querySelector('.goods-list').innerHTML = listHtml;
-  }
-}
+class Catalog {
 
-class BasketItem {
-  /*
-  quantity
-  discount
-  promo
-  */
-}
+    constructor(){
+        this.goods = [];
 
-class Basket {
-  /*
-  TotalPrice
-  delivery
-  */
-}
+        this.getGoods();
+    }
 
+    getGoods() {
+        fetch(
+            'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json',
+            {
+                method: 'GET'
+            }
+        ).then(res => res.json()).then(res => {
+            this.goods = res.map(item => new CatalogItem(...item));
+        });
+    }
 
-const list = new GoodsList();
-list.fetchGoods();
-list.render();
-
-/*
-function renderGoodsItem(title, price){
-    console.log(title, price);
-    document.getElementById('goods-list').innerHTML += `<div class="item"><h3>` + title + `</h3><p>` + price + `</p></div>`;
-}
-
-// const renderItems = items => items.map(renderGoodsItem);
-
-function renderItems(goods) {
-    for (let [key, value] of goods.entries()) {
-      renderGoodsItem(value.title, value.price);
+    render() {
+        return this.goods.map(item => item.render()).join('');
     }
 }
-
- renderItems(goods);
-*/
