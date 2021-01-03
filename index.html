@@ -7,7 +7,15 @@
 </head>
 <body>
 
+<form name="form" action="" method="post">
+    <input type="text" id="name" name="name" required minlength="6" maxlength="6">
+    <input type="text" id="phone" name="phone" required minlength="10">
+    <input type="text" id="email" name="email" required minlength="8">
+    <input type="text" id="text" name="text" required minlength="6">
 
-    <script src="script.js"></script>
+    <button type="button" onclick="validateForm()">проверить</button>
+</form>
+
+<script src="script.js"></script>
 </body>
 </html>

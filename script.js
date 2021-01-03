@@ -1,104 +1,60 @@
-const xhr = new XMLHttpRequest();
+    /*
+    a.  Имя содержит только буквы.
+    b.  Телефон имеет вид +7(000)000-0000.
+    c.  E-mail имеет вид mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru.
+    d.  Текст произвольный.
+    e.  Если одно из полей не прошло валидацию, необходимо выделить это поле красной
+        рамкой и сообщить пользователю об ошибке.
+        onsubmit="return validateForm()"
+        onclick="validateForm()"
+    */
+    'use strict';
 
-xhr.onreadystatechange = function () {
-    if(this.readyState === 4){
-        console.log(this.responseText);
-        console.log(this.responseXML);
-        const res = JSON.parse(this.responseText);
-        console.log(res);
-        console.log(JSON.stringify(res));
-    }
-};
+    let regexp_name = /^\w+$/;
+    let regexp_phone = /^(\+\d{1,3})?\(?\d{3}\)?(-\d{2}){2}/;
+    let regexp_email = /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/;
 
-xhr.open(
-    'GET',
-    'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json',
-    true
-);
-// xhr.setRequestHeader('Content-Type', 'application/xml');
+    const inputs = document.querySelectorAll('input');
+    console.log(inputs);
 
-xhr.send();
+    inputs.forEach(function (highlightInput) {
+        input.addEventListener('click', function (event) {
+            handleClick(event);
+        })
+    });
 
+    function handleClick(clickedButtonEvent) {
 
-
-const str = '';
-console.log(1235);
-
-// setTimeout(
-//     () => {console.log(1)},
-//     0
-// );
-
-// setTimeout(
-//     () => {console.log(2)},
-//     1000
-// );
-
-const func = (p1, p2, p3, cb) => {
-    setTimeout(
-        () => {
-            console.log(1);
-            // ...
-            const pr = p1 + p2 + p3; 
-            cb(pr);
-        },
-        1000
-    );
-};
-
-func(1, 2, 3, console.log);
-
-// const promise = new Promise((resolve, reject) => {
-//     setTimeout(
-//         () => Math.round(Math.random() * 100) % 2 ? resolve('Success') : reject('Error'),       
-//         1000
-//     );
-// });
-
-// promise.then((res) => {
-//     console.log(res);
-//     //return new Promise(/* ... */);
-// }).catch(console.error);//.then(/* ... */)
-
-
-const fetchPromise = fetch(
-    'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json',
-    {
-        method: 'GET'
-    }
-);
-console.log('fetchPromise', fetchPromise);
-
-const getRawDataPromise = fetchPromise.then(res => res.json());
-console.log('getRawDataPromise', getRawDataPromise);
-
-const dataPromise = getRawDataPromise.then(res => console.log('res', res));
-console.log('dataPromise', dataPromise);
-
-class CatalogItem {
-
-}
-
-class Catalog {
-
-    constructor(){
-        this.goods = [];
-
-        this.getGoods();
     }
 
-    getGoods() {
-        fetch(
-            'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json',
-            {
-                method: 'GET'
-            }
-        ).then(res => res.json()).then(res => {
-            this.goods = res.map(item => new CatalogItem(...item));
-        });
-    }
+    function validateForm() {
+        var name = document.forms["form"]["name"].value;
+        var phone = document.forms["form"]["phone"].value;
+        var email = document.forms["form"]["email"].value;
 
-    render() {
-        return this.goods.map(item => item.render()).join('');
+
+        if (name == "") {
+            alert("Name must be filled out");
+            return false;
+        } else {
+            console.log(regexp_name.test(name));
+            card.img.style.display = 'none';
+//            input.name.style.display = 'none';
+        }
+
+        if (phone == "") {
+            alert("Phone must be filled out");
+            return false;
+        } else {
+            console.log('phone: ' + phone);
+            console.log(regexp_phone.test(phone));
+        }
+
+        if (email == "") {
+            alert("Email must be filled out");
+            return false;
+        } else {
+            console.log(regexp_email.test(email));
+        }
+
     }
-}
