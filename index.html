@@ -18,7 +18,7 @@
 
       <div id="list-cart">
         <div class="border border-primary animate__animated animate__backInDown" v-if="isVisibleCart">
-          <div v-if="goods_empty.length">
+          <div v-if="goods.length">
             <div class="goods-list">
                 <div v-for="good in goods">
                   <h3>{{ good.product_name }}</h3>
